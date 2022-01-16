@@ -1,15 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import rootReducer, { rootSaga } from '.';
-
-const sagaMiddleware = createSagaMiddleware();
+import { createWrapper } from 'next-redux-wrapper';
+import reducer from '.';
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: [sagaMiddleware],
-  devTools: true,
+  reducer,
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
-sagaMiddleware.run(rootSaga);
+export const wrapper = createWrapper(() => store, {
+  debug: process.env.NODE_ENV !== 'production',
+});
 
 export type RootState = ReturnType<typeof store.getState>;

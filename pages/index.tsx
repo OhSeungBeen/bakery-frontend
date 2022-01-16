@@ -3,11 +3,15 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../modules';
-import userSlice from '../modules/user';
+import { getPosts } from '../modules/post';
 
-const NameWrapper = styled.div`
-  font-size: 2rem;
+const PostWrapper = styled.div`
+  font-size: 1rem;
   color: #452bdb;
+`;
+
+const PostItemWrapper = styled.span`
+  margin: 0.5rem;
 `;
 
 const ButtonWrapper = styled.button`
@@ -18,10 +22,10 @@ const ButtonWrapper = styled.button`
 
 const Home: NextPage = () => {
   const dispatch = useDispatch();
-  const name = useSelector((state: RootState) => state.user.name);
+  const posts = useSelector((state: RootState) => state.post.data);
 
   const onClick = () => {
-    dispatch(userSlice.actions.changeName({ name: 'Bakery User' }));
+    dispatch(getPosts());
   };
 
   return (
@@ -31,8 +35,14 @@ const Home: NextPage = () => {
         <meta name="" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NameWrapper>{name}</NameWrapper>
-      <ButtonWrapper onClick={(e) => onClick()}>변경</ButtonWrapper>
+      <ButtonWrapper onClick={(e) => onClick()}>API 호출</ButtonWrapper>
+      {posts &&
+        posts.map((post) => (
+          <PostWrapper key={post.id}>
+            <PostItemWrapper>id: {post.id}</PostItemWrapper>
+            <PostItemWrapper>title: {post.title}</PostItemWrapper>
+          </PostWrapper>
+        ))}
     </>
   );
 };

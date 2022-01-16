@@ -1,17 +1,16 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import { all } from 'redux-saga/effects';
-import user, { userSaga, UserState } from './user';
+import { AnyAction, combineReducers, Reducer } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
+import post, { PostState } from './post';
 
 export type RootState = {
-  user: UserState;
+  post: PostState;
 };
 
-const rootReducer = combineReducers({
-  user: user.reducer,
-});
+const reducer: Reducer<RootState, AnyAction> = (state, action) => {
+  if (action.type === HYDRATE) {
+    return { ...state, ...action.payload };
+  }
+  return combineReducers({ post: post.reducer })(state, action);
+};
 
-export function* rootSaga() {
-  yield all([userSaga()]);
-}
-
-export default rootReducer;
+export default reducer;
