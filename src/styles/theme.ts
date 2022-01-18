@@ -1,13 +1,18 @@
 import {DefaultTheme} from "styled-components";
 
-export const theme: DefaultTheme = {
-    breakPoint: '769px',
+
+const size = {
+  mobile: '600px',
+  tablet: '900px',
+  laptop: '1200px',
+  desktop: '1800px',
+}
   
-    colors: {
-      black: '#1e1f1d',
-      yellow: '#edb83c',
-      orange: '#eb7952',
-      gray: '#6e6e6e',
-      gray_background: '#f5f5f5',
-    },
-  };
+export const theme: DefaultTheme = {
+  mainColor: '#0a4297',
+  mobile: `(max-width: ${size.mobile})`,
+  tablet: `(max-width: ${size.tablet})`,
+  laptop: `(max-width: ${size.laptop})`,
+  desktop: `(min-width: ${size.desktop})`,
+}
+  
