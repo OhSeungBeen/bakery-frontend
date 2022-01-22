@@ -19,7 +19,12 @@ const ButtonWrapper = styled.button`
   background-color: white;
   border: 1px solid;
 `;
-
+const MainContainer = styled.div`
+  width: 378px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+`;
 const Home: NextPage = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.post.data);
@@ -35,14 +40,9 @@ const Home: NextPage = () => {
         <meta name="" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ButtonWrapper onClick={(e) => onClick()}>API 호출</ButtonWrapper>
-      {posts &&
-        posts.map((post) => (
-          <PostWrapper key={post.id}>
-            <PostItemWrapper>id: {post.id}</PostItemWrapper>
-            <PostItemWrapper>title: {post.title}</PostItemWrapper>
-          </PostWrapper>
-        ))}
+      <MainContainer>
+        <PostWrapper>fddsf</PostWrapper>
+      </MainContainer>
     </>
   );
 };
