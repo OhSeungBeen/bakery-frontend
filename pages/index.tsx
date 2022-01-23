@@ -10,20 +10,12 @@ const PostWrapper = styled.div`
   color: #452bdb;
 `;
 
-const PostItemWrapper = styled.span`
-  margin: 0.5rem;
-`;
-
-const ButtonWrapper = styled.button`
-  font-size: 1rem;
-  background-color: white;
-  border: 1px solid;
-`;
 const MainContainer = styled.div`
   width: 378px;
+  height: 300px;
   background-color: red;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-content: center;
 `;
 const Home: NextPage = () => {
   const dispatch = useDispatch();
@@ -34,16 +26,15 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
+    <MainContainer>
       <Head>
         <title>Bakery | Home</title>
         <meta name="" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainContainer>
-        <PostWrapper>fddsf</PostWrapper>
-      </MainContainer>
-    </>
+
+      <PostWrapper>fddsf</PostWrapper>
+    </MainContainer>
   );
 };
 
