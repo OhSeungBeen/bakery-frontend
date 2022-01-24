@@ -5,10 +5,6 @@ import { theme } from '../styles/theme';
 import { GlobalStyle } from '../styles/global-styles';
 import styled from 'styled-components';
 
-const WrapperContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
@@ -20,5 +16,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
-
+const WrapperContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  max-width: 768px;
+  width: 100%;
+`;
 export default wrapper.withRedux(MyApp);
