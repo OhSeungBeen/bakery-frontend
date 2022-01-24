@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 const WrapperContainer = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 768px;
+  max-width: auto;
   width: 100%;
 `;
 export default wrapper.withRedux(MyApp);

@@ -33,6 +33,10 @@ const BottomWrapper = styled.div`
   justify-content: space-evenly;
   z-index: 999;
   background-color: #fff;
+  @media ${({ theme }) => theme.mobile} {
+    width: 100%;
+    left: 0;
+  }
 `;
 
 export default BottomTab;
