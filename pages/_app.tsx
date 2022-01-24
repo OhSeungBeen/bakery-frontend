@@ -3,12 +3,20 @@ import { wrapper } from '../modules/store';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import { GlobalStyle } from '../styles/global-styles';
+import styled from 'styled-components';
 
+const WrapperContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <WrapperContainer>
+        <GlobalStyle />
+
+        <Component {...pageProps} />
+      </WrapperContainer>
     </ThemeProvider>
   );
 }

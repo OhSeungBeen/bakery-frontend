@@ -1,17 +1,17 @@
-import {createGlobalStyle} from 'styled-components';
-import {normalize} from 'styled-normalize';
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
 
 export const GlobalStyle = createGlobalStyle`
+${normalize}
 body {
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans KR", "Noto Sans CJK KR
+  font-family: "Noto Sans KR", "Noto Sans CJK KR";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   word-break: keep-all;
 }
- 
 * {
   padding: 0;
   margin: 0;
