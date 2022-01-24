@@ -4,10 +4,12 @@ const TopTab = () => {
   return <TopWrapper></TopWrapper>;
 };
 const TopWrapper = styled.div`
-  width: 376px;
+  max-width: 767px;
+  width: 100%;
   position: absolute;
   background-color: #9b6a3e;
   top: 0;
+  left: 0;
   height: 60px;
   display: flex;
   align-items: center;
