@@ -35,6 +35,10 @@ const MapWrapper = styled.div`
     color: #fac713;
     cursor: pointer;
   }
+  button:hover {
+    background: #ffd43b;
+    color: #000;
+  }
 `;
 
 const Map = styled.div`

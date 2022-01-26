@@ -6,7 +6,7 @@ import KakaoMap from './kakaoMap';
 import TopTab from '../../components/common/TopTab';
 import like from '../../assets/icon/like.png';
 import liked from '../../assets/icon/liked.png';
-import IconButton from '../common/IconButton';
+import IconButton from '../common/iconButton';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -40,7 +40,7 @@ const BottomSheetHeader = styled.div`
   align-items: center;
   font-size: 16px;
 
-  span:first-child {
+  .number {
     font-weight: 600;
     color: #744f2f;
   }
@@ -69,20 +69,21 @@ const ContentContainer = styled.div`
   flex: 2;
   color: #757575;
 
-  div:nth-child(1) {
+  .title {
     font-weight: 600;
     font-size: 16px;
     color: #3a2817;
   }
-  div:nth-child(2) span:nth-child(1) {
+  .state {
     font-size: 13px;
     font-weight: 700;
   }
-  div:nth-child(2) span:nth-child(2) {
+  .time {
     font-size: 13px;
     font-weight: 500;
   }
-  div:nth-child(3) {
+  .distace,
+  .menu {
     font-size: 14px;
     font-weight: 500;
   }
@@ -106,17 +107,6 @@ const LikedContainer = styled.div`
     font-size: 12px;
     color: #c2844e;
   }
-`;
-
-const LikedButton = styled.button<{ src: string }>`
-  width: 27px;
-  height: 24px;
-  cursor: pointer;
-  border-style: none;
-  background: transparent;
-  background-image: ${(props) => `url(${props.src})`};
-  background-repeat: no-repeat;
-  background-position: center;
 `;
 
 const Home = () => {
@@ -158,7 +148,7 @@ const Home = () => {
           ]}
           header={
             <BottomSheetHeader>
-              <span>0</span>
+              <span className="number">0</span>
               <span>개의 동네 빵집을 찾았어요.</span>
             </BottomSheetHeader>
           }
@@ -168,14 +158,14 @@ const Home = () => {
               <div></div>
             </ImageContainer>
             <ContentContainer>
-              <div>우리 동네 빵집</div>
+              <div className="title">우리 동네 빵집</div>
               <div>
-                <span>영업중</span>
-                <span>11:00 ~ 18:00</span>
+                <span className="state">영업중</span>
+                <span className="time">11:00 ~ 18:00</span>
               </div>
               <div>
-                <span>300m</span>
-                <span>크로와상, 타르트</span>
+                <span className="distace">300m</span>
+                <span className="menu">크로와상, 타르트</span>
               </div>
             </ContentContainer>
             <LikedContainer>

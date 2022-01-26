@@ -8,17 +8,17 @@ interface TopTabProps {
   onChange: (address: string) => void;
 }
 const TopWrapper = styled.div`
-  max-width: 767px;
-  width: 100%;
-  position: fixed;
-  background-color: #9b6a3e;
-  top: 0;
-  height: 80px;
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  max-width: 767px;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  padding: 10px 20px;
   z-index: 999;
+  background-color: #9b6a3e;
   box-shadow: 0px 4px 4px rgba(19, 13, 8, 0.05);
   @media ${({ theme }) => theme.mobile} {
     width: 100%;
@@ -29,11 +29,10 @@ const TopWrapper = styled.div`
 const Left = styled.div`
   display: flex;
   align-items: center;
-  color: #f9f3ed;
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: -4%;
-  h4 {
+  .address {
+    color: #f9f3ed;
+    font-weight: 600;
+    font-size: 20px;
     margin-right: 10px;
   }
   button {
@@ -44,15 +43,44 @@ const Left = styled.div`
     cursor: pointer;
   }
   svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 `;
-const Right = styled.div``;
+const Right = styled.div`
+  display: flex;
+  align-items: center;
+  .state {
+    font-size: 14px;
+    color: #f9f3ed;
+  }
+`;
+
+const Toggle = styled.div<{ state: boolean }>`
+  display: flex;
+  align-items: center;
+  width: 52px;
+  height: 24px;
+  margin-left: 12px;
+  background: ${(props) => (props.state ? '#744f2f' : '#F9F3ED')};
+  border-radius: 40px;
+  cursor: pointer;
+  .circle {
+    width: 20px;
+    height: 20px;
+    margin: 0 3px;
+    background: #ffd43b;
+    border-radius: 50%;
+    box-shadow: -2px 0px 4px rgba(78, 53, 31, 0.1);
+    transition: all 0.3s ease-in;
+    transform: ${(props) => (props.state ? 'translateX(26px)' : 'none')};
+  }
+`;
 
 const TopTab: React.FC<TopTabProps> = ({ onChange }) => {
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState('');
+  const [state, setState] = useState(true);
 
   const onOpen = () => {
     setOpen(true);
@@ -67,15 +95,26 @@ const TopTab: React.FC<TopTabProps> = ({ onChange }) => {
     onChange(address.address);
   };
 
+  const onToggle = () => {
+    setState((prev) => !prev);
+  };
+
   return (
     <TopWrapper>
       <Left>
-        <h4>{address ? address : '주소를 설정해주세요'}</h4>
+        <div className="address">
+          {address ? address : '주소를 설정해주세요'}
+        </div>
         <button onClick={(e) => onOpen()}>
           <MdKeyboardArrowDown />
         </button>
       </Left>
-      <Right></Right>
+      <Right>
+        <div className="state">{state ? '영업중' : null}</div>
+        <Toggle state={state} onClick={onToggle}>
+          <div className="circle"></div>
+        </Toggle>
+      </Right>
       {open && (
         <AddressSettingModal onClose={onClose} onComplete={onComplete} />
       )}

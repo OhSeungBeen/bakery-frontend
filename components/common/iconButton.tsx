@@ -42,7 +42,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       height={height}
       active={active}
       onClick={onToggle}
-    ></Button>
+    />
   );
 };
 
