@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import DaumPostcode, { Address } from 'react-daum-postcode';
 import { MdOutlineClose } from 'react-icons/md';
 
-interface LocationSettingModalPorps {
+interface AddressSettingModalPorps {
   onClose: () => void;
   onComplete: (address: Address) => void;
 }
@@ -43,7 +43,7 @@ const Modal = styled.div`
   }
 `;
 
-const LocationSettingModal: React.FC<LocationSettingModalPorps> = ({
+const AddressSettingModal: React.FC<AddressSettingModalPorps> = ({
   onClose,
   onComplete,
 }) => {
@@ -63,4 +63,4 @@ const LocationSettingModal: React.FC<LocationSettingModalPorps> = ({
   );
 };
 
-export default LocationSettingModal;
+export default AddressSettingModal;

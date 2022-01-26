@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-
-export interface Location {
-  latitude: number;
-  longitude: number;
-}
+import myLocation from '../../assets/icon/myLocation.png';
+import store from '../../assets/icon/store.png';
 
 interface KakaoMapProps {
-  location: Location | null;
   address?: string;
+  onSearch: (mapRef: any) => void;
 }
 
 declare global {
@@ -19,21 +16,23 @@ declare global {
 
 const MapWrapper = styled.div`
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: calc(100vh - 80px - 60px);
 
   button {
     position: absolute;
+    width: 182px;
+    height: 48px;
+    transform: translate(-50%, 0);
     left: 50%;
     top: 20px;
     z-index: 1;
-    transform: translate(-50%, 0);
-    padding: 0.8rem 1.2rem;
-    font-size: 0.8rem;
-    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 24px;
     border: none;
-    background-color: #3a2817;
-    color: #fff000;
+    background: #3a2817;
+    color: #fac713;
     cursor: pointer;
   }
 `;
@@ -41,65 +40,34 @@ const MapWrapper = styled.div`
 const Map = styled.div`
   width: 100%;
   height: 100%;
-  .content {
-    width: 150px;
-    text-align: center;
-    padding: 6px 0;
-  }
-  div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > img {
-    -webkit-animation: blink 1.5s ease-in-out infinite alternate;
-    -moz-animation: blink 1.5s ease-in-out infinite alternate;
-    animation: blink 1.5s ease-in-out infinite alternate;
-    @-webkit-keyframes blink {
-      0% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-    @-moz-keyframes blink {
-      0% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-    @keyframes blink {
-      0% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  }
 `;
 
-const createMarker = (map: any, center: any, address: string) => {
-  console.log(center);
-  let imageMaker = new window.kakao.maps.MarkerImage(
-    '/map/location2.png',
-    new window.kakao.maps.Size(24, 24),
+const createMarker = (map: any, center: any, type: string) => {
+  let makerImage = new window.kakao.maps.MarkerImage(
+    type === 'store' ? store.src : myLocation.src,
+    type === 'store'
+      ? new window.kakao.maps.Size(50, 50)
+      : new window.kakao.maps.Size(27, 27),
   );
 
   let marker = new window.kakao.maps.Marker({
-    map: map,
     position: center,
-    image: imageMaker,
-    clickable: true,
+    image: makerImage,
   });
-
-  let infowindow = new window.kakao.maps.InfoWindow({
-    content: `<div class="content">${address}</div>`,
-  });
-  infowindow.open(map, marker);
-  // map.setCenter(coords);
+  marker.setMap(map);
 };
 
-const KakaoMap: React.FC<KakaoMapProps> = ({ address, location }) => {
+const KakaoMap: React.FC<KakaoMapProps> = ({ address, onSearch }) => {
   const mapRef = useRef<any>();
+
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
+  const [mapCenter, setMapCenter] = useState({
+    latitude: 37.541,
+    longitude: 126.986,
+  });
 
   useEffect(() => {
     const mapScript = document.createElement('script');
@@ -110,74 +78,62 @@ const KakaoMap: React.FC<KakaoMapProps> = ({ address, location }) => {
     const onLoadKakaoMap = () => {
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
+        let center = new window.kakao.maps.LatLng(
+          mapCenter.latitude,
+          mapCenter.longitude,
+        );
+        const map = new window.kakao.maps.Map(container, { center, level: 3 });
+        mapRef.current = map;
 
-        if (location) {
-          let center = new window.kakao.maps.LatLng(
-            location.latitude,
-            location.longitude,
-          );
-
-          const map = new window.kakao.maps.Map(container, { center });
-          mapRef.current = map;
-          const appkey = 'c42a28467e0a3fd69bd60a554f14c41e';
-          const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.latitude}&y=${location.longitude}&input_coord=WGS84`;
-          const headers = new Headers();
-          headers.append('Authorization', `KakaoAK ${appkey}`);
-          const mode = 'cors';
-
-          (async () => {
-            const response = await fetch(url, { headers, mode });
-            const result = await response.json();
-            createMarker(
-              map,
-              center,
-              result.documents[0]
-                ? result.documents[0].road_address.address_name
-                : '현재 위치',
-            );
-          })();
-          // geocoder.coord2RegionCode(
-          //   location.latitude,
-          //   location.longitude,
-          //   function (result: any, status: any) {
-          //     if (status === window.kakao.maps.services.Status.OK) {
-          //       console.log('지역 명칭 : ' + result[0].address_name);
-          //       console.log('행정구역 코드 : ' + result[0].code);
-          //     }
-          //   },
-          // );
-        }
-
-        if (address) {
-          let geocoder = new window.kakao.maps.services.Geocoder();
-          geocoder.addressSearch(address, function (result: any, status: any) {
-            if (status === window.kakao.maps.services.Status.OK) {
-              let center = new window.kakao.maps.LatLng(
-                result[0].y,
-                result[0].x,
-              );
-              const map = new window.kakao.maps.Map(container, { center });
-              createMarker(map, center, address);
-            }
-          });
-        }
+        createMarker(map, center, 'store');
       });
     };
-
     mapScript.addEventListener('load', onLoadKakaoMap);
 
     return () => mapScript.removeEventListener('load', onLoadKakaoMap);
-  }, [address, location]);
+  }, []);
 
-  const onSearchCurLoaction = () => {
-    console.log(mapRef.current.getBounds().getSouthWest());
-    console.log(mapRef.current.getBounds().getNorthEast());
-  };
+  useEffect(() => {
+    if (address) {
+      let geocoder = new window.kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, function (result: any, status: any) {
+        if (status === window.kakao.maps.services.Status.OK) {
+          let center = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+          setMapCenter({ latitude: result[0].y, longitude: result[0].x });
+          mapRef.current.setCenter(center);
+          createMarker(mapRef.current, center, 'myLocation');
+        }
+      });
+    }
+  }, [address]);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+    }
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowSize.width < 767 && windowSize.width !== 0) {
+      let center = new window.kakao.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+      mapRef.current.setCenter(center);
+    }
+  }, [windowSize]);
 
   return (
     <MapWrapper>
       <Map id="map" />
-      <button onClick={onSearchCurLoaction}>현재 위치에서 검색</button>
+      <button onClick={() => onSearch(mapRef)}>현재 위치에서 검색</button>
     </MapWrapper>
   );
 };
