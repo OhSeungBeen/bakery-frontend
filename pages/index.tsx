@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import BottomTab from '../components/common/bottomTab';
-import Search from '../components/search/search';
+import Search from '../components/search/serach';
 import styled from 'styled-components';
 import Home from '../components/home/home';
 
