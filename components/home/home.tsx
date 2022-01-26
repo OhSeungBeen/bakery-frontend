@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 import KakaoMap from './kakaoMap';
-import TopTab from '../../components/common/TopTab';
+import TopTab from '../common/topTab';
 import like from '../../assets/icon/like.png';
 import liked from '../../assets/icon/liked.png';
 import IconButton from '../common/iconButton';
@@ -23,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
     [data-rsbs-header]:before {
       background: #744F2F;
     }
-    
   }
 `;
 

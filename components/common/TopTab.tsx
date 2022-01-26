@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Address } from 'react-daum-postcode';
 import AddressSettingModal from '../home/addressSettingModal';
+import ToggleButton from './toggleButton';
 
 interface TopTabProps {
   onChange: (address: string) => void;
@@ -56,27 +57,6 @@ const Right = styled.div`
   }
 `;
 
-const Toggle = styled.div<{ state: boolean }>`
-  display: flex;
-  align-items: center;
-  width: 52px;
-  height: 24px;
-  margin-left: 12px;
-  background: ${(props) => (props.state ? '#744f2f' : '#F9F3ED')};
-  border-radius: 40px;
-  cursor: pointer;
-  .circle {
-    width: 20px;
-    height: 20px;
-    margin: 0 3px;
-    background: #ffd43b;
-    border-radius: 50%;
-    box-shadow: -2px 0px 4px rgba(78, 53, 31, 0.1);
-    transition: all 0.3s ease-in;
-    transform: ${(props) => (props.state ? 'translateX(26px)' : 'none')};
-  }
-`;
-
 const TopTab: React.FC<TopTabProps> = ({ onChange }) => {
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState('');
@@ -111,9 +91,7 @@ const TopTab: React.FC<TopTabProps> = ({ onChange }) => {
       </Left>
       <Right>
         <div className="state">{state ? '영업중' : null}</div>
-        <Toggle state={state} onClick={onToggle}>
-          <div className="circle"></div>
-        </Toggle>
+        <ToggleButton active={state} onToggle={onToggle} />
       </Right>
       {open && (
         <AddressSettingModal onClose={onClose} onComplete={onComplete} />

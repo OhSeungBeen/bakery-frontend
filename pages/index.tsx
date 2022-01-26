@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
-import BottomTab from '../components/common/BottomTab';
-import BreadStore from '../components/breadstore/BreadStore';
-import Search from '../components/search/Search';
+import BottomTab from '../components/common/bottomTab';
+import Search from '../components/search/search';
 import styled from 'styled-components';
 import Home from '../components/home/home';
 
@@ -16,8 +15,6 @@ const HomePage: NextPage = () => {
         return <Home />;
       case 2:
         return <Search />;
-      case 3:
-        return <BreadStore />;
 
       // some other cases
 
