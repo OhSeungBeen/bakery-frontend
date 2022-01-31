@@ -4,7 +4,10 @@ import Image from 'next/image';
 import backspace from '../../assets/icon/backspace.png';
 import shareIcon from '../../assets/icon/share.png';
 import likeIcon from '../../assets/icon/like.png';
+import starIcon from '../../assets/icon/star.png';
 import MenuList from '../../components/detail/menuList';
+import Info from '../../components/detail/info/info';
+import Review from '../../components/detail/review/review';
 
 const menuData = [
   {
@@ -20,6 +23,19 @@ const menuData = [
 const StoreDetail = () => {
   const [menuClicked, setMenuClicked] = useState(1);
 
+  const renderTab = () => {
+    switch (menuClicked) {
+      case 1:
+        return <Info />;
+      case 2:
+        return <Review />;
+
+      // some other cases
+
+      default:
+        return <></>;
+    }
+  };
   return (
     <Container>
       <TabPicture>
@@ -29,10 +45,22 @@ const StoreDetail = () => {
           </BackButtn>
           <IconPlus>
             <Image src={shareIcon} alt="공유하기" />
-            <Image src={likeIcon} alt="공유하기" />
+            <Image src={likeIcon} alt="좋아요" />
           </IconPlus>
         </IconArea>
-        <Ptitle>우리 동네 빵집</Ptitle>
+
+        <PtitleContainer>
+          <TitleArea>
+            우리 동네 빵집
+            <PtitleImgArea>
+              <div>
+                <Image alt="별점" src={starIcon} objectFit="fill" />
+              </div>
+              <StarValue>4.5</StarValue>
+            </PtitleImgArea>
+          </TitleArea>
+          <OpenCloseTime>영업중 | 11:00 ~ 18:00</OpenCloseTime>
+        </PtitleContainer>
       </TabPicture>
       <Menu>
         {/* {menuClicked === 1 ? (
@@ -60,6 +88,7 @@ const StoreDetail = () => {
           </>
         ))}
       </Menu>
+      {renderTab()}
     </Container>
   );
 };
@@ -77,15 +106,18 @@ const TabPicture = styled.div`
   background: #f9f3ed;
   position: relative;
 `;
-const Ptitle = styled.div`
+const PtitleContainer = styled.div`
   position: absolute;
-  width: 138px;
+  width: 208px;
   height: 33px;
   left: 23px;
   top: 315px;
+`;
+const TitleArea = styled.div`
   font-weight: bold;
   font-size: 24px;
   line-height: 33px;
+  display: flex;
 `;
 const IconArea = styled.div`
   display: flex;
@@ -97,9 +129,6 @@ const IconArea = styled.div`
 const BackButtn = styled.div``;
 const IconPlus = styled.div`
   padding-right: 32px;
-  &:nth-child(1) {
-    padding-right: 50px;
-  }
 `;
 const Menu = styled.div`
   display: flex;
@@ -111,4 +140,23 @@ const Menu = styled.div`
   //   }
 `;
 
+const PtitleImgArea = styled.div`
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+`;
+const StarValue = styled.div`
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  padding-left: 4.86px;
+`;
+const OpenCloseTime = styled.div`
+  font-size: 16px;
+  line-height: 22px;
+  color: #757575;
+  opacity: 0.99;
+  margin-top: 5px;
+`;
 export default StoreDetail;

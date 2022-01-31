@@ -1,10 +1,10 @@
-import React, { memo, Dispatch, SetStateActio } from 'react';
+import React, { memo, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface Props {
   title: string;
   active: number;
-  menuClicked: (index: number) => void;
+  menuClicked: Dispatch<SetStateAction<number>>;
   index: number;
 }
 const menuList = ({ title, active, menuClicked, index }: Props) => {
@@ -14,22 +14,18 @@ const menuList = ({ title, active, menuClicked, index }: Props) => {
   return (
     <>
       <TextContainer onClick={() => menuClick(index)} active={active}>
-        <Text>{title}</Text>
-        <Line></Line>
+        <Text active={active}>{title}</Text>
+        <Line active={active}></Line>
       </TextContainer>
     </>
   );
 };
 const TextContainer = styled.div`
-  ${({ active }) =>
-    active &&
-    `
-  background: blue;
-  `}
   & > div {
     display: flex;
     justify-content: center;
   }
+  cursor: pointer;
 `;
 
 const Text = styled.div`
@@ -39,7 +35,7 @@ const Text = styled.div`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.04em;
-  color: #c2844e;
+  color: ${(props) => (props.active ? '#3A2817' : '#c2844e')};
 `;
 const Line = styled.div`
   display: flex;
@@ -48,7 +44,9 @@ const Line = styled.div`
   height: 0px;
   left: 20px;
   top: 479px;
-  border: 1px solid #c2844e;
-  margin-top: 9px;
+  border: ${(props) =>
+    props.active ? '2px solid #3A2817' : '1px solid #c2844e'};\
+  margin-top:${(props) => (props.active ? '8px' : '9px')};
+
 `;
 export default memo(menuList);
