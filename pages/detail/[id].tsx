@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import backspace from '../../assets/icon/backspace.png';
 import shareIcon from '../../assets/icon/share.png';
 import likeIcon from '../../assets/icon/like.png';
+import MenuList from '../../components/detail/menuList';
+
+const menuData = [
+  {
+    idx: 1,
+    name: '가게 정보',
+  },
+  {
+    idx: 2,
+    name: '리뷰',
+  },
+];
+
 const StoreDetail = () => {
+  const [menuClicked, setMenuClicked] = useState(1);
+
   return (
     <Container>
       <TabPicture>
@@ -19,20 +34,48 @@ const StoreDetail = () => {
         </IconArea>
         <Ptitle>우리 동네 빵집</Ptitle>
       </TabPicture>
+      <Menu>
+        {/* {menuClicked === 1 ? (
+          <MenuList title="가게 정보" active={true} />
+        ) : (
+          <MenuList title="가게 정보" active={false} />
+        )} */}
+        {menuData.map((menu, index: number) => (
+          <>
+            {index + 1 === menuClicked ? (
+              <MenuList
+                title={menu.name}
+                active={true}
+                menuClicked={setMenuClicked}
+                index={menu.idx}
+              />
+            ) : (
+              <MenuList
+                title={menu.name}
+                active={false}
+                menuClicked={setMenuClicked}
+                index={menu.idx}
+              />
+            )}
+          </>
+        ))}
+      </Menu>
     </Container>
   );
 };
 
 const Container = styled.div`
+  display: grid;
+  place-content: center;
   max-width: 767px;
   width: 100%;
   height: 100%;
-  background-color: red;
 `;
 const TabPicture = styled.div`
   width: 375px;
   height: 400px;
   background: #f9f3ed;
+  position: relative;
 `;
 const Ptitle = styled.div`
   position: absolute;
@@ -54,9 +97,18 @@ const IconArea = styled.div`
 const BackButtn = styled.div``;
 const IconPlus = styled.div`
   padding-right: 32px;
-  & img:nth-child(1) {
+  &:nth-child(1) {
     padding-right: 50px;
   }
+`;
+const Menu = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+
+  //   & > div:first-child {
+  //     padding-right: 128px;
+  //   }
 `;
 
 export default StoreDetail;
