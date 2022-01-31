@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
- ToggleButtonProps {
+interface ToggleButtonProps {
   active: boolean;
   onToggle: () => void;
 }
