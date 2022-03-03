@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import Home from '../components/home/home';
-import Layout from '@/components/common/Layout';
+import { Layout } from '@/components/common';
 
 const HomePage: NextPage = () => {
   return <Home />;
