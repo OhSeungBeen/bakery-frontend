@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { Link } from '.';
 import styled from 'styled-components';
-import { ICONS, COLORS } from '@/styles/theme';
+import { ICONS } from '@/styles/theme';
 
 const MainNavBar: React.FC = () => {
   const router = useRouter();
@@ -42,7 +42,7 @@ const MainNavBar: React.FC = () => {
         activePath={router.pathname}
       />
       <Link
-        path={'/account'}
+        path={'/my'}
         icons={{
           normal: ICONS.my,
           acitve: ICONS.myActive,
