@@ -4,14 +4,25 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 import { GlobalStyle } from '../styles/global-styles';
 import styled from 'styled-components';
+import { ReactElement, ReactNode } from 'react';
+import { NextPage } from 'next';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <ThemeProvider theme={theme}>
       <WrapperContainer>
         <GlobalStyle />
-
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </WrapperContainer>
     </ThemeProvider>
   );
