@@ -43,7 +43,4 @@ li {
 a {
   text-decoration: none;
 }
-main {
-  padding-top: 70px;
-}
 `;

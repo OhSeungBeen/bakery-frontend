@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
-import backspace from '../../assets/icon/backspace.png';
+import backspace from '../../assets/icons/ic-backspace.png';
 import shareIcon from '../../assets/icon/share.png';
 import likeIcon from '../../assets/icon/like.png';
 import starIcon from '../../assets/icon/star.png';
