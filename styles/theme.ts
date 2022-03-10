@@ -154,7 +154,7 @@ export const ICONS = {
   bread6: require('@/assets/icons/ic-bread6.png'),
   checkLarge: require('@/assets/icons/ic-check-large.png'),
   check: require('@/assets/icons/ic-check.png'),
-  leftArrow: require('@/assets/icons/ic-left-arrow.png'),
+  rightArrow: require('@/assets/icons/ic-right-arrow.png'),
   reviewStar: require('@/assets/icons/ic-review-star.png'),
   share: require('@/assets/icons/ic-share.png'),
   myLocation: require('@/assets/icons/ic-my-location.png'),
@@ -171,4 +171,8 @@ export const ICONS = {
   likeActive: require('@/assets/icons/ic-like-active.png'),
   my: require('@/assets/icons/ic-my.png'),
   myActive: require('@/assets/icons/ic-my-active.png'),
+  logo: require('@/assets/icons/ic-logo.png'),
+  back: require('@/assets/icons/ic-back.png'),
+  filledLike: require('@/assets/icons/ic-filled-like.png'),
+  outlinedLike: require('@/assets/icons/ic-outlined-like.png'),
 };
