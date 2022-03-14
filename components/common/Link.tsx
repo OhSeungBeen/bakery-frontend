@@ -2,15 +2,16 @@ import React from 'react';
 import LinkBase from 'next/link';
 import Image from 'next/image';
 
-type Props = {
+interface LinkProps {
   path: string;
   activePath: string;
   icons: {
     normal: string;
     acitve: string;
   };
-};
-const Link: React.FC<Props> = ({ path, icons, activePath }) => {
+}
+
+export const Link: React.FC<LinkProps> = ({ path, icons, activePath }) => {
   const isFocussed = path === activePath;
 
   return (
@@ -19,5 +20,3 @@ const Link: React.FC<Props> = ({ path, icons, activePath }) => {
     </LinkBase>
   );
 };
-
-export default Link;

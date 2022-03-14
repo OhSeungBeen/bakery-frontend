@@ -1,10 +1,11 @@
 import React from 'react';
 import { MainNavBar } from '.';
 
-type Props = {
+interface LayoutProps {
   withNavigator: boolean;
-};
-const Layout: React.FC<Props> = ({ withNavigator, children }) => {
+}
+
+export const Layout: React.FC<LayoutProps> = ({ withNavigator, children }) => {
   return (
     <>
       <main>{children}</main>
@@ -12,5 +13,3 @@ const Layout: React.FC<Props> = ({ withNavigator, children }) => {
     </>
   );
 };
-
-export default Layout;
