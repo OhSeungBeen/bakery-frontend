@@ -175,4 +175,5 @@ export const ICONS = {
   back: require('@/assets/icons/ic-back.png'),
   filledLike: require('@/assets/icons/ic-filled-like.png'),
   outlinedLike: require('@/assets/icons/ic-outlined-like.png'),
+  detailShare: require('@/assets/icons/ic-detail-share.png'),
 };
