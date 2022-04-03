@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Image from 'next/image';
 import { NextPage } from 'next';
+import { Router } from 'next/router';
 import styled from 'styled-components';
 import { COLORS, ICONS } from '@/styles/theme';
 import Top from '@/components/my/Top';
+import { Layout } from '@/components/common';
 
 const townData = [
   { name: '집 동네' },
@@ -11,7 +13,7 @@ const townData = [
   { name: '데이트 동네' },
 ];
 
-const TownPage: NextPage = () => {
+const TownPage = () => {
   return (
     <Container>
       <Top title="자주가는 동네 설정" button={<Button>편집</Button>} />
@@ -128,5 +130,9 @@ const Info = styled.div`
     margin-top: 8px;
   }
 `;
+
+TownPage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout withNavigator>{page}</Layout>;
+};
 
 export default TownPage;

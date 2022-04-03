@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import Image from 'next/image';
-import { NextPage } from 'next';
 import styled, { css } from 'styled-components';
 import { COLORS, ICONS } from '@/styles/theme';
 import Top from '@/components/my/Top';
 import WriteableReview from '@/components/my/WriteableReview';
 import WrittenReview from '@/components/my/WrittenReview';
+import { Layout } from '@/components/common';
 
 const reviewData = {
   nickName: '우리동네가짱이야',
 };
 
-const ReviewPage: NextPage = () => {
+const ReviewPage = () => {
   const [activeTap, setActiveTap] = useState(0);
 
   const taps = [
-    { title: '작성가능 리뷰', content: <WriteableReview /> },
-    { title: '작성한 리뷰', content: <WrittenReview /> },
+    { title: '작성가능 리뷰(2)', content: <WriteableReview /> },
+    { title: '작성한 리뷰(1)', content: <WrittenReview /> },
   ];
 
   const onClickTap = (index: number) => {
@@ -105,5 +105,9 @@ const TapItem = styled.li<{ activeTap: boolean }>`
 `;
 
 const Content = styled.div``;
+
+ReviewPage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout withNavigator>{page}</Layout>;
+};
 
 export default ReviewPage;

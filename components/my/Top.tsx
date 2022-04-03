@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 import { COLORS, ICONS } from '@/styles/theme';
 
@@ -10,11 +11,17 @@ interface Props {
 }
 
 const Top: React.FC<Props> = ({ button, title }) => {
+  const router = useRouter();
+
+  const onClickBackSpace = () => {
+    router.back();
+  };
+
   return (
     <Container>
-      <BackspaceImageWrapper>
+      <BackspaceImageButton onClick={onClickBackSpace}>
         <Image src={ICONS.backspace} alt="뒤로가기" />
-      </BackspaceImageWrapper>
+      </BackspaceImageButton>
       <Title>{title}</Title>
       <Button>{button && button}</Button>
     </Container>
@@ -28,7 +35,7 @@ const Container = styled.div`
   padding: 30px 24px;
 `;
 
-const BackspaceImageWrapper = styled.div`
+const BackspaceImageButton = styled.div`
   flex: 1;
   cursor: pointer;
 `;
