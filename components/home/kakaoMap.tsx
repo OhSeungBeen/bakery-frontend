@@ -17,7 +17,7 @@ declare global {
 const MapWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100vh - 80px - 60px);
+  height: calc(100vh - 80px - 64px);
 
   button {
     position: absolute;

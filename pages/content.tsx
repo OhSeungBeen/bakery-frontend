@@ -2,7 +2,7 @@ import { Layout } from '@/components/common';
 import { NextPage } from 'next';
 import { ReactElement } from 'react';
 
-const ContentPage: NextPage = () => {
+const ContentPage = () => {
   return (
     <div>
       <h1>ContentPage</h1>

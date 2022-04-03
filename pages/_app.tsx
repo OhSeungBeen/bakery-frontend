@@ -20,17 +20,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <ThemeProvider theme={theme}>
-      <WrapperContainer>
-        <GlobalStyle />
-        {getLayout(<Component {...pageProps} />)}
-      </WrapperContainer>
+      <GlobalStyle />
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   );
 }
-const WrapperContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  max-width: auto;
-  width: 100%;
-`;
+
 export default wrapper.withRedux(MyApp);

@@ -12,8 +12,6 @@ const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  max-width: 767px;
   width: 100%;
   height: 80px;
   top: 0;

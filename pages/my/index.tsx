@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-import { NextPage } from 'next';
+import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { COLORS, ICONS } from '@/styles/theme';
-import { Layout } from '@/components/common';
 import Top from '@/components/my/Top';
+import { Layout } from '@/components/common';
 
 const myData = {
   nickName: '우리동네가짱이야',
@@ -14,12 +14,21 @@ const myData = {
 
 // const myData = null;
 
-const MyPage: NextPage = () => {
+const MyPage = () => {
   return (
-    <Container>
+    <>
       <Top title="마이페이지" />
       <Profile>
-        <ProfileImage></ProfileImage>
+        <ProfileImage>
+          <Image width={38} height={44} src={ICONS.mypageEmoji} />
+          {myData ? (
+            <Link href={'/my/profile'}>
+              <AlterButton>
+                <Image width={14} height={14} src={ICONS.mypageAlter} />
+              </AlterButton>
+            </Link>
+          ) : null}
+        </ProfileImage>
         {myData ? (
           <>
             <NickNameWrapper>
@@ -36,24 +45,34 @@ const MyPage: NextPage = () => {
         )}
       </Profile>
       <IconMenu>
+        <Link href={'/my/town'}>
+          <IconMenuItem>
+            <IconMenuImage>
+              <Image width={22} height={24} src={ICONS.mypageLocation} />
+            </IconMenuImage>
+            <IconMenuTitle>동네관리</IconMenuTitle>
+          </IconMenuItem>
+        </Link>
+        <Link href={'/my/review'}>
+          <IconMenuItem>
+            <IconMenuImage>
+              <Image width={22} height={24} src={ICONS.mypageReview} />
+            </IconMenuImage>
+            <IconMenuTitle>리뷰관리</IconMenuTitle>
+          </IconMenuItem>
+        </Link>
         <IconMenuItem>
-          <IconMenuImage></IconMenuImage>
-          <IconMenuTitle>동네관리</IconMenuTitle>
-        </IconMenuItem>
-        <IconMenuItem>
-          <IconMenuImage></IconMenuImage>
-          <IconMenuTitle>리뷰관리</IconMenuTitle>
-        </IconMenuItem>
-        <IconMenuItem>
-          <IconMenuImage></IconMenuImage>
+          <IconMenuImage>
+            <Image width={22} height={24} src={ICONS.mypageNotice} />
+          </IconMenuImage>
           <IconMenuTitle>알림센터</IconMenuTitle>
         </IconMenuItem>
       </IconMenu>
       <Menu>
-        <MenuItem>
+        {/* <MenuItem>
           <MenuItemTitle>개인정보 설정/변경</MenuItemTitle>{' '}
           <Image src={ICONS.leftArrow} alt="이동"></Image>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem>
           고객센터
           <Image src={ICONS.leftArrow} alt="이동"></Image>
@@ -63,14 +82,9 @@ const MyPage: NextPage = () => {
           <Image src={ICONS.leftArrow} alt="이동"></Image>
         </MenuItem>
       </Menu>
-    </Container>
+    </>
   );
 };
-
-const Container = styled.div`
-  max-width: 767px;
-  width: 100%;
-`;
 
 const Profile = styled.div`
   margin-top: 20px;
@@ -81,11 +95,30 @@ const Profile = styled.div`
 `;
 
 const ProfileImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: ${COLORS.lightBrown[400]};
   border: 3px solid ${COLORS.deepBrown[0]};
+  position: relative;
+`;
+
+const AlterButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  background-color: ${COLORS.white};
+  border: 1px solid ${COLORS.deepBrown[0]};
+  cursor: pointer;
 `;
 
 const NickNameWrapper = styled.div`
@@ -135,10 +168,13 @@ const IconMenuItem = styled.li`
 `;
 
 const IconMenuImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 36px;
   height: 36px;
   margin: auto;
-  background-color: ${COLORS.lightBrown[100]};
+  /* background-color: ${COLORS.lightBrown[100]}; */
 `;
 
 const IconMenuTitle = styled.div`
@@ -169,8 +205,8 @@ const MenuItemTitle = styled.div`
   font-size: 16px;
 `;
 
-// MyPage.getLayout = function getLayout(page: ReactElement) {
-//   return <Layout withNavigator>{page}</Layout>;
-// };
+MyPage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout withNavigator>{page}</Layout>;
+};
 
 export default MyPage;

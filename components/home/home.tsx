@@ -3,10 +3,10 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 import KakaoMap from './kakaoMap';
-import TopTab from '../common/toptab';
 import like from '../../assets/icon/like.png';
 import liked from '../../assets/icon/liked.png';
 import IconButton from '../common/iconButton';
+import TopTab from '../common/topTab';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,12 +24,6 @@ const GlobalStyle = createGlobalStyle`
       background: #744F2F;
     }
   }
-`;
-
-const Container = styled.div`
-  margin-top: 80px;
-  max-width: 767px;
-  width: 100%;
 `;
 
 const BottomSheetHeader = styled.div`
@@ -134,53 +128,51 @@ const Home = () => {
   return (
     <>
       <TopTab onChange={onChangeAddress} />
-      <Container>
-        <KakaoMap address={address ? address : undefined} onSearch={onSearch} />
-        <GlobalStyle />
-        <BottomSheet
-          open={open}
-          onDismiss={onDismiss}
-          blocking={false}
-          snapPoints={({ headerHeight, maxHeight }) => [
-            headerHeight,
-            maxHeight - 80 - 60,
-          ]}
-          header={
-            <BottomSheetHeader>
-              <span className="number">0</span>
-              <span>개의 동네 빵집을 찾았어요.</span>
-            </BottomSheetHeader>
-          }
-        >
-          <StoreListItem>
-            <ImageContainer>
-              <div></div>
-            </ImageContainer>
-            <ContentContainer>
-              <div className="title">우리 동네 빵집</div>
-              <div>
-                <span className="state">영업중</span>
-                <span className="time">11:00 ~ 18:00</span>
-              </div>
-              <div>
-                <span className="distace">300m</span>
-                <span className="menu">크로와상, 타르트</span>
-              </div>
-            </ContentContainer>
-            <LikedContainer>
-              <IconButton
-                width={like.width}
-                height={like.height}
-                defaultSrc={like.src}
-                activeSrc={liked.src}
-                active={active}
-                onToggle={onToggleLike}
-              />
-              <span>0</span>
-            </LikedContainer>
-          </StoreListItem>
-        </BottomSheet>
-      </Container>
+      <KakaoMap address={address ? address : undefined} onSearch={onSearch} />
+      <GlobalStyle />
+      <BottomSheet
+        open={open}
+        onDismiss={onDismiss}
+        blocking={false}
+        snapPoints={({ headerHeight, maxHeight }) => [
+          headerHeight,
+          maxHeight - 80 - 64,
+        ]}
+        header={
+          <BottomSheetHeader>
+            <span className="number">0</span>
+            <span>개의 동네 빵집을 찾았어요.</span>
+          </BottomSheetHeader>
+        }
+      >
+        <StoreListItem>
+          <ImageContainer>
+            <div></div>
+          </ImageContainer>
+          <ContentContainer>
+            <div className="title">우리 동네 빵집</div>
+            <div>
+              <span className="state">영업중</span>
+              <span className="time">11:00 ~ 18:00</span>
+            </div>
+            <div>
+              <span className="distace">300m</span>
+              <span className="menu">크로와상, 타르트</span>
+            </div>
+          </ContentContainer>
+          <LikedContainer>
+            <IconButton
+              width={like.width}
+              height={like.height}
+              defaultSrc={like.src}
+              activeSrc={liked.src}
+              active={active}
+              onToggle={onToggleLike}
+            />
+            <span>0</span>
+          </LikedContainer>
+        </StoreListItem>
+      </BottomSheet>
     </>
   );
 };
