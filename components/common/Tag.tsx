@@ -2,13 +2,19 @@ import React from 'react';
 import { COLORS } from '@/styles/theme';
 import styled from 'styled-components';
 
-type Props = {
+interface TagProps {
   content: string;
   type?: 'light' | 'deep';
   selected: boolean;
   onClick: () => void;
-};
-const Tag: React.FC<Props> = ({ content, type, selected, onClick }) => {
+}
+
+export const Tag: React.FC<TagProps> = ({
+  content,
+  type,
+  selected,
+  onClick,
+}) => {
   return (
     <Wrapper type={type} selected={selected} onClick={onClick}>
       {content}
@@ -39,5 +45,3 @@ const Wrapper = styled.div<Pick<Props, 'type' | 'selected'>>`
       ? COLORS.deepBrown[200]
       : COLORS.lightBrown[200]};
 `;
-
-export default Tag;

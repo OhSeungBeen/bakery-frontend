@@ -4,7 +4,7 @@ import { Link } from '.';
 import styled from 'styled-components';
 import { ICONS } from '@/styles/theme';
 
-const MainNavBar: React.FC = () => {
+export const MainNavBar: React.FC = () => {
   const router = useRouter();
 
   return (
@@ -63,5 +63,3 @@ const Wrapper = styled.nav`
   padding: 20px;
   box-shadow: 0px -4px 8px rgba(19, 13, 8, 0.05);
 `;
-
-export default MainNavBar;

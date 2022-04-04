@@ -1,14 +1,13 @@
 import Head from 'next/head';
 
-type Props = {
+interface SeoProps {
   title: string;
-};
-const Seo: React.FC<Props> = ({ title }) => {
+}
+
+export const Seo: React.FC<SeoProps> = ({ title }) => {
   return (
     <Head>
       <title>Bakery | {title}</title>
     </Head>
   );
 };
-
-export default Seo;
