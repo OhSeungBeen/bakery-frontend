@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { MainNavBar } from '.';
 
-type Props = {
+interface LayoutProps {
   withNavigator: boolean;
-};
-const Layout: React.FC<Props> = ({ withNavigator, children }) => {
+}
+
+export const Layout: React.FC<LayoutProps> = ({ withNavigator, children }) => {
   return (
     <>
       <Container>

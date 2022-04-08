@@ -1,8 +1,7 @@
-import Seo from './Seo';
-import Link from './Link';
-import MainNavBar from './MainNavBar';
-import Layout from './Layout';
-import Tag from './Tag';
-import CheckBox from './CheckBox';
-
-export { Seo, Link, MainNavBar, Layout, Tag, CheckBox };
+export * from './Seo';
+export * from './Link';
+export * from './MainNavBar';
+export * from './Layout';
+export * from './Tag';
+export * from './CheckBox';
+export * from './Button';

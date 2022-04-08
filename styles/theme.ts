@@ -72,7 +72,7 @@ export const ICONS = {
   bread6: require('@/assets/icons/ic-bread6.png'),
   checkLarge: require('@/assets/icons/ic-check-large.png'),
   check: require('@/assets/icons/ic-check.png'),
-  leftArrow: require('@/assets/icons/ic-left-arrow.png'),
+  rightArrow: require('@/assets/icons/ic-right-arrow.png'),
   reviewStar: require('@/assets/icons/ic-review-star.png'),
   reviewStarHalf: require('@/assets/icons/ic-review-star-half.png'),
   share: require('@/assets/icons/ic-share.png'),
@@ -97,4 +97,9 @@ export const ICONS = {
   mypageNotice: require('@/assets/icons/my/ic-notice.png'),
   mypageReview: require('@/assets/icons/my/ic-review.png'),
   mypageAlter: require('@/assets/icons/my/ic-alter.png'),
+  logo: require('@/assets/icons/ic-logo.png'),
+  back: require('@/assets/icons/ic-back.png'),
+  filledLike: require('@/assets/icons/ic-filled-like.png'),
+  outlinedLike: require('@/assets/icons/ic-outlined-like.png'),
+  detailShare: require('@/assets/icons/ic-detail-share.png'),
 };

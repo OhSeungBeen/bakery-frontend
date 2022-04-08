@@ -3,12 +3,17 @@ import { COLORS } from '@/styles/theme';
 import styled from 'styled-components';
 import { ComponentState } from '../types';
 
-type Props = {
+interface CheckBoxProps {
   disabled?: boolean;
   checked: boolean;
   onClick: () => void;
-};
-const CheckBox: React.FC<Props> = ({ disabled, checked, onClick }) => {
+}
+
+export const CheckBox: React.FC<CheckBoxProps> = ({
+  disabled,
+  checked,
+  onClick,
+}) => {
   const state: ComponentState = disabled
     ? 'disabled'
     : checked
@@ -45,10 +50,10 @@ const Wrapper = styled.div<{ state: ComponentState }>`
       : COLORS.deepBrown[0]};
   border: ${(props) =>
     props.state === 'normal' && `2px solid ${COLORS.lightBrown[500]}`};
+
   svg {
     fill: none;
     stroke: ${COLORS.white};
     stroke-width: 3px;
   }
 `;
-export default CheckBox;
